@@ -1,0 +1,377 @@
+
+
+@font-face {
+    font-family: dinbold;
+    src: url('/font/DIN_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: newsgot;
+    src: url('/font/News_Oblique.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: Monaco;
+    font-style: normal;
+    font-weight: normal;
+    src: url('/font/Monaco.woff') format('woff');
+    }
+
+
+body {
+    font-family: dinbold;
+    /* font-size: 80px; */
+    font-size: 22px;
+    line-height: 22px;
+    color: white;
+    background: black;
+
+    width: 100%; 
+    height: 100%;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        font-size: 1em;
+        line-height: 1.1em;
+    }
+  }
+
+.toast {
+    font-size: 20px;
+}
+
+.controls {
+    display: none;
+    padding: 5px;
+    background-color: #666;
+    z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 10vw;
+    width: 100%;
+    font-size: 18px;
+}
+
+@keyframes slide {
+    from { left: 100%;}
+    to { left: -300%;}
+}
+@-webkit-keyframes slide {
+    from { left: 100%;}
+    to { left: -300%;}
+}
+
+.info {
+    color: white;
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 2.2vh;
+    font-family: 'newsgot', 'Courier New', Courier, monospace;
+
+    height:40px;
+    line-height:40px;
+    overflow:hidden;
+}
+
+.infotxt {
+    width: 100%;
+    position:absolute;
+    animation-name: slide;
+    animation-duration: 40s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: slide;
+    -webkit-animation-duration: 40s;
+    -webkit-animation-timing-function:linear;
+    -webkit-animation-iteration-count: infinite;
+}
+
+.content {
+    display: none;
+    color: white;
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* text-align: center; */
+    vertical-align: center;
+    
+    /* padding: 20px; */
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
+
+.introtxt {
+    text-align: center;
+    margin: auto;
+    width: 80%;
+}
+
+
+
+.introtitle {
+    font-family: newsgot;
+    font-size: 3vh; 
+    line-height: 6.5vh;
+    margin-left: 1vw;
+}
+
+.intrologo {
+    height: 6vh;
+    width: auto;
+    margin-left: 1.5vw;
+    margin-top: -2.6vh;
+}
+
+.introimg {
+    width: 70%;
+    /* height: 10vh; */
+    margin: auto;
+    display: block;
+}
+
+#space-gif {
+    width: 28vw;
+    position: fixed;
+    bottom: 5%;
+    left: 35vw;
+}
+
+#ctrl-gif {
+    width: 8px;
+    position: fixed;
+    top: 20px;
+    left: 0;
+}
+
+
+.exit {
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 0px 4px;
+    z-index: 10000;
+}
+
+.fs {
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 0px 4px;
+    z-index: 10000;
+}
+
+.widget-exit {
+    z-index: 90;
+}
+
+.fsimg {
+    width: 3vh;
+}
+
+
+#textzone{
+    /* position: relative;  */
+    /* top: 33%; */
+    margin: 10px;
+}
+
+
+.namescreen, .connecting {
+    position: fixed; 
+    top: 5%;
+    left: 5%;
+
+    /*width: 1000px;
+    height: 200px;
+    margin-top: -150px; 
+    margin-left: -550px;
+
+    font-size: 25px; */
+    padding: 50px;
+    z-index: 100;
+    background: #111;
+    border: 1px solid #666;
+    text-align: center;
+  }
+
+.connecting {
+    z-index: 110;
+}
+
+.namescreen em {
+    /* font-size: 18px; */
+}
+
+.red5pro-media-container {
+    background: fixed;
+    position: absolute !important;
+    top: 7vh;
+    bottom: 35px;
+    right: 0px;
+    left: 0px;
+    overflow: hidden;
+    width: auto;
+    height: auto !important;
+}
+
+#remoteVideo, #red5pro-subscriber {
+    height: 100%;
+    width: 100%;
+}
+
+.gauge-container {
+    position: absolute;
+    top: 18%;
+    width: 6%;
+    bottom: 14%;
+    right: 7.5%;
+    background-color: transparent;
+    background-size: cover;
+    z-index: 200;
+}
+
+.spaceoverlay {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: black;
+    /* display: none; */
+    z-index: 100;
+    opacity: 0;
+}
+
+.names-container {
+    position: absolute;
+    top: 18%;
+    /* width: 50vw; */
+    bottom: 14%;
+    left: 7.5%;
+    background-color: transparent;
+    background-size: cover;
+    z-index: 300;
+    font-family: Monaco;
+    font-size: 1.9vh;
+    line-height: 4.5vh;
+}
+
+.namename {
+    font-size: 3vh;
+}
+
+.winneroverlay {
+    position: fixed;
+    top: 30%;
+    left: 30%;
+    background-color: black;
+    padding: 3%;
+    /* display: none; */
+    z-index: 400;
+    font-size: 1.5em;
+}
+
+.winner2 {
+    font-size: 2em;
+    line-height: 1.3em;
+}
+
+.suhtdownoverlay {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /* display: none; */
+    z-index: 300;
+    cursor: none;
+}
+
+.shutdowncolor {
+    background-color: #025A9C;
+}
+
+.shutdowncolor-mac {
+    background-color: #BFBFBF;
+}
+
+.shutdowncolor-ios {
+    background-color: #BFBFBF;
+}
+
+.shutdowncolor-win {
+    background-color: #025A9C;
+}
+
+.shutdowncolor-andro {
+    background-color: #1E2024;
+}
+
+.shutdowncolor-linux {
+    background-color: #2F0023;
+}
+
+
+#shutdown-gif
+{
+    position:absolute;
+    width:500px; /*image width */
+    height:250px; /*image height */
+    left:50%; 
+    top:50%;
+    margin-left:-250px; /*image width/2 */
+    margin-top:-125px; /*image height/2 */
+}
+
+
+
+@-moz-keyframes blinker {  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+ }
+
+@-webkit-keyframes blinker {  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+ }
+
+@keyframes blinker {  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+ }
+
+ .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }

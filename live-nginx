@@ -1,0 +1,28 @@
+server {
+	server_name live.kxkm.net;
+    	listen 443 ssl;
+    	
+	location /
+    	{
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    	}	
+
+	ssl_certificate /etc/letsencrypt/live/live.kxkm.net/fullchain.pem; # managed by Certbot
+    	ssl_certificate_key /etc/letsencrypt/live/live.kxkm.net/privkey.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = live.kxkm.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    listen   80;
+    server_name live.kxkm.net;
+    return 404; # managed by Certbot
+}
