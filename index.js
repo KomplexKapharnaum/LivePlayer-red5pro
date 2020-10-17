@@ -1,5 +1,6 @@
 // kademe-server
 
+var showName = ''
 var lastCmd =  {'action': 'phase', 'arg': 'intro', 'from': 'Bonnard'}
 var book = []
 
@@ -29,6 +30,7 @@ io.on('connection', function(client)
 
     // Setup client to correct phase
     client.emit('cmd', lastCmd)
+    client.emit('show-name', showName)
     client.emit('allNames', book)
 
     // Notify others
@@ -54,6 +56,11 @@ io.on('connection', function(client)
     console.log('relay cmd', data);
     if (data.action == 'phase') lastCmd = data // save activePhase
     io.emit('cmd', data)
+  })
+
+  client.on('show-name', (data)=>{
+    showName = data
+    io.emit('show-name', data)
   })
 
 });

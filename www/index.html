@@ -16,10 +16,7 @@
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 		<script src="/js/nosleep.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 		<!-- Red5Pro -->
 		<script src="//webrtc.github.io/adapter/adapter-latest.js"></script>
@@ -35,13 +32,16 @@
 		
 		<div class="controls">
 			<button class='ctrlBtn' data-action="phase"	data-arg="intro" >intro</button>
-      <button class='ctrlBtn' data-action="test"  >test</button>
-      //
+			<button class='ctrlBtn' data-action="test"  >test</button>
+			//
 			<button class='ctrlBtn' data-action="phase"	data-arg="live"  >live</button>
 			<button class='ctrlBtn' data-action="phase" data-arg="end">end</button>
 			// 
 			<button class='ctrlBtn' data-action="reload"	>reload</button>
 			<button class='ctrlBtn' data-action="clear"		>clear</button>
+			//
+			<input type="text" id="show-newname" />
+			<button id="showname-send">show name</button>
 		</div>
 
 		<div class="connecting widget widget-connecting">
@@ -58,11 +58,11 @@
 			<div class='introtxt'>
 				<br />
 				<br />
-				Bonjour <span class="namedisplay"></span>,<br />
+				Bonjour<br />
 				<br />
-				Le live n'a pas encore commencé. <br />
+				Le Live n'a pas encore commencé<br />
 				<br />
-				Si vous perdez patience, rechargez la page.<br /><br /><br /><br />
+				Si vous perdez patience, rechargez la page<br /><br /><br /><br />
 				<img class="intrologo" src="/img/kxkm.png" /><br />
 				<br />
 			</div>
@@ -72,8 +72,8 @@
 
 		<!-- LIVE -->
 		<div class="content widget widget-live">
-			<div id="textzone"> KompleX KapharnaüM : Broken Bridge Live </div>
-			<video id="red5pro-subscriber" class="red5pro-media red5pro-media-background" autoplay loop muted playsinline></video>
+			<div id="textzone"> KompleX KapharnaüM <span id="show-name"></span> </div>
+			<video id="red5pro-subscriber" class="red5pro-media red5pro-media-background" autoplay loop muted playsinline controls></video>
 		</div>
 		
 		<!-- QUIT -->

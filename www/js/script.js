@@ -7,6 +7,21 @@ var noSleep = new NoSleep()
 var namesCount = 0
 
 
+// URL PARAMS
+var urlParams;
+(window.onpopstate = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    urlParams = {};
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+})();
+
+
 /* View in fullscreen */
 function openFullscreen() {
     var elem = document.documentElement;
@@ -51,6 +66,8 @@ function showCursor() {
 //  Run
 //
 $(function() {
+
+    if ('ctrl' in urlParams) $(".controls").show()
 
     var timeout = null;
     $('video').on('mousemove touchend', function() {
@@ -207,6 +224,12 @@ $(function() {
         else kontroller[data['action']](data['arg'], data['from']);
     });
 
+    // Receive Cmd => call action
+    //
+    socket.on('show-name', (data) => {
+        console.log('show name: ', data)
+        $('#show-name').html(data)
+    });
 
     // Bind Controls BTNS -> Send cmd to server in order to broadcast
     //
@@ -220,6 +243,11 @@ $(function() {
             'from':     'nobody'
         }
         socket.emit('cmd', cmd)
+    });
+
+    $('#showname-send').on('click', ()=>{
+        socket.emit('show-name', $('#show-newname').val())
+        console.log('send new name',  $('#show-newname').val())
     });
 
 

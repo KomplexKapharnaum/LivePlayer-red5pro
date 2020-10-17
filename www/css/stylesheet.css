@@ -1,4 +1,7 @@
-
+@font-face {
+    font-family: Plaak56;
+    src: url("/font/205-Plaak56.otf") format("opentype");
+}
 
 @font-face {
     font-family: dinbold;
@@ -25,7 +28,7 @@
 
 
 body {
-    font-family: dinbold;
+    font-family: "Plaak56", dinbold;
     /* font-size: 80px; */
     font-size: 22px;
     line-height: 22px;
@@ -55,8 +58,8 @@ body {
     z-index: 2000;
     position: fixed;
     top: 0;
-    left: 10vw;
-    width: 100%;
+    right: 1vw;
+    /*width: 100%;*/
     font-size: 18px;
 }
 
@@ -67,6 +70,10 @@ body {
 @-webkit-keyframes slide {
     from { left: 100%;}
     to { left: -300%;}
+}
+
+#show-name {
+    margin-left: 20px;
 }
 
 .info {
