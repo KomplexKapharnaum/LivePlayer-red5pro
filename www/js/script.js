@@ -97,7 +97,7 @@ $(function() {
     // Set FULLSCREEN
     function goFullscreen() {
         // Prevent Closing (Alt+F4)
-        window.onbeforeunload = (e) => { if (!allowUnload) e.returnValue = false; };
+        //window.onbeforeunload = (e) => { if (!allowUnload) e.returnValue = false; };
         noSleep.enable();
         openFullscreen()
         window.addEventListener("orientationchange", function() {

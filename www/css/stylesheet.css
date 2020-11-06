@@ -76,6 +76,10 @@ body {
     margin-left: 20px;
 }
 
+.salleimg {
+    width: 300px;
+}
+
 .info {
     color: white;
     background-color: #333;
@@ -144,7 +148,6 @@ body {
 .intrologo {
     height: 6vh;
     width: auto;
-    margin-left: 1.5vw;
     margin-top: -2.6vh;
 }
 
