@@ -44,7 +44,6 @@ function goFullscreen() {
 
 // Devmode
 document.onkeyup = function(e) {
-    $('.instructionContainer').hide()
     if (e.ctrlKey && e.altKey && e.key == 'K' /*&& myName.startsWith('Dick Cheney')*/ )
         $(".controls").show()
 };
@@ -131,12 +130,3 @@ $(".ctrlBtn").on('click', function(event) {
     }
     socket.emit('cmd', cmd)
 });
-
-
-// Instructions
-$('.instructionContainer').on('click touchstart', () => {
-    $('.instructionContainer').hide()
-})
-setTimeout(() => {
-    $('.instructionContainer').hide()
-}, 15000)

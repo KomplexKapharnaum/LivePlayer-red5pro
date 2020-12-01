@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <title>KXKM Live</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css?2" />
+    <link rel="icon" href="/img/favicon.svg" />
+
+    <!-- Electron compat: Insert this line above script imports  -->
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        };
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="/js/nosleep.min.js"></script>
+    <script src="/js/lightbox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css" />
+
+    <!-- Bootstrap -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
+
+
+    <!-- Red5Pro -->
+    <script src="//webrtc.github.io/adapter/adapter-latest.js"></script>
+    <link href="//red5.kxkm.net/webrtcexamples/lib/red5pro/red5pro-media.css" rel="stylesheet">
+    <script src="//red5.kxkm.net/webrtcexamples/lib/screenfull/screenfull.min.js"></script>
+
+    <!-- Electron compat:  Insert this line after script imports -->
+    <script>
+        if (window.module) module = window.module;
+    </script>
+
+</head>
+
+<body class="noselect">
+
+    <div class="controls">
+        <button class='ctrlBtn' data-action="phase" data-arg="intro">intro</button>
+        <button class='ctrlBtn' data-action="test">test</button> //
+        <button class='ctrlBtn' data-action="phase" data-arg="live">live</button>
+        <button class='ctrlBtn' data-action="phase" data-arg="end">end</button> //
+        <button class='ctrlBtn' data-action="reload">reload</button>
+        <button class='ctrlBtn' data-action="clear">clear</button> //
+        <input type="text" id="show-newname" />
+        <button id="showname-send">show name</button>
+    </div>
+
+    <div class="connecting widget widget-connecting">
+        recherche du serveur de spectacle...
+    </div>
+
+    <div class="namescreen widget widget-welcome" id="accept-welcome">
+        Bienvenue!<br /><br /> Cliquez ici pour accéder<br />au live...
+    </div>
+
+    <!-- INTRO -->
+    <div class="content widget widget-intro">
+        <div class='introtxt'>
+            <br />
+            <br /> Bienvenue !<br />
+            <br /> Prochains rendez-vous :<br />
+            <br /> Fenêtre ouverte sur l'atelier de création de KompleX KapharnaüM pour Esch 2022<br />
+            <br /> du 30 novembre au 4 décembre<br /> de 19h à 20h<br />
+            <br /> en attendant, vous pouvez visiter notre site :<br />
+            <a href="https://kxkm.net">kxkm.net</a><br />
+            <br /> A bientôt<br />
+        </div>
+
+    </div>
+
+
+    <!-- LIVE -->
+    <div class="content widget widget-live">
+        <div id="textzone"> KompleX KapharnaüM<br /><span id="show-name"></span> </div>
+
+        <div class="container">
+            <div id="players">
+                <div class="mainplayer">
+                    <video id="player-1" class="red5pro-sub red5pro-media red5pro-media-background" data-stream="stream1" autoplay loop muted playsinline></video>
+                </div>
+                <div class="mainplayer">
+                    <video id="player-2" class="red5pro-sub red5pro-media red5pro-media-background" data-stream="stream2" autoplay loop muted playsinline></video>
+                </div>
+                <div class="mainplayer">
+                    <video id="player-3" class="red5pro-sub red5pro-media red5pro-media-background" data-stream="stream3" autoplay loop muted playsinline></video>
+                </div>
+                <div class="mainplayer">
+                    <video id="player-4" class="red5pro-sub red5pro-media red5pro-media-background" data-stream="stream4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="mainplayer">
+                    <video id="player-5" class="red5pro-sub red5pro-media red5pro-media-background" data-stream="stream5" autoplay loop muted playsinline></video>
+                </div>
+            </div>
+
+            <div class="row-players">
+                <div class="subplayer">
+                    <canvas id="mini-stream1" class="red5pro-minisub" data-stream-id="1"></canvas>
+                </div>
+                <div class="subplayer">
+                    <canvas id="mini-stream2" class="red5pro-minisub" data-stream-id="2"></canvas>
+                </div>
+                <div class="subplayer">
+                    <canvas id="mini-stream3" class="red5pro-minisub" data-stream-id="3"></canvas>
+                </div>
+                <div class="subplayer">
+                    <canvas id="mini-stream4" class="red5pro-minisub" data-stream-id="4"></canvas>
+                </div>
+                <div class="subplayer">
+                    <canvas id="mini-stream5" class="red5pro-minisub" data-stream-id="5"></canvas>
+                </div>
+                <span class="stretch"></span>
+            </div>
+        </div>
+
+
+        <!-- <div class="container">
+            <div id="mainplayer" class="mainplayer">
+                <canvas id="bigVideo"></canvas>
+            </div>
+
+            <div class="row-players">
+                <div class="subplayer">
+                    <video id="player-1" class="red5pro-minisub red5pro-media red5pro-media-background" data-stream="stream1" autoplay loop muted playsinline></video>
+                </div>
+                <div class="subplayer">
+                    <video id="player-2" class="red5pro-minisub red5pro-media red5pro-media-background" data-stream="stream2" autoplay loop muted playsinline></video>
+                </div>
+                <div class="subplayer">
+                    <video id="player-3" class="red5pro-minisub red5pro-media red5pro-media-background" data-stream="stream3" autoplay loop muted playsinline></video>
+                </div>
+                <div class="subplayer">
+                    <video id="player-4" class="red5pro-minisub red5pro-media red5pro-media-background" data-stream="stream4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="subplayer">
+                    <video id="player-5" class="red5pro-minisub red5pro-media red5pro-media-background" data-stream="stream5" autoplay loop muted playsinline></video>
+                </div>
+                <span class="stretch"></span>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- QUIT -->
+    <div class="content widget widget-end">
+        <div class='introtxt'>
+            <br />
+            <br />
+            <br /> Le Live est terminée.<br /><br /> à bientôt !<br /><br /><br /><br /><br /><br /><br />
+            <img class="intrologo" src="/img/kxkm.png" />
+        </div>
+    </div>
+
+
+    <script src="//red5.kxkm.net/webrtcexamples/lib/red5pro/red5pro-sdk.min.js"></script>
+    <script src="/js/script.js?5"></script>
+</body>
+
+
+</html>
