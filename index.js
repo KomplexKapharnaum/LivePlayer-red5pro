@@ -1,5 +1,5 @@
 // kademe-server
-
+var chatFile = '/opt/LivePlayer-red5pro/chat.json'
 var showName = ''
 var lastCmd = { 'action': 'phase', 'arg': 'intro', 'from': 'Bonnard' }
 var book = []
@@ -11,6 +11,7 @@ var app = express();
 var http = require('http').createServer(app);
 const fetch = require('node-fetch');
 var io = require('socket.io')(http);
+const fs = require('fs');
 
 console.log('starting server')
 
@@ -35,6 +36,11 @@ app.get('/teststream/:streamid', function(req, res) {
 
 // CHAT History
 var history = []
+try {
+    history = JSON.parse(fs.readFileSync(chatFile))['history']
+} catch (e) {
+    console.warn(e)
+}
 
 io.on('connection', function(client) {
     console.log('a user connected');
@@ -52,7 +58,7 @@ io.on('connection', function(client) {
         client['name'] = name
         book.push(name)
         counter += 1
-        io.emit('newName', name)
+        io.emit('count', counter + 20)
 
         // console.log('cli introduced as', name)
         console.log('number of cli: ', counter)
@@ -62,10 +68,10 @@ io.on('connection', function(client) {
     // Client exit: remove from book and inform others
     client.on('disconnect', function() {
         console.log('user disconnected');
-        io.emit('goneName', client['name'])
         var index = book.indexOf(client['name']);
         if (index > -1) book.splice(index, 1);
         counter -= 1
+        io.emit('count', counter + 20)
         console.log('number of cli: ', counter)
     });
 
@@ -83,12 +89,16 @@ io.on('connection', function(client) {
 
     client.on('chat-msg', function(msg) {
         if (msg['msg'] == '#clear') {
+            let data = JSON.stringify({ 'history': history });
+            fs.writeFileSync(chatFile + '-' + Date.now(), data);
             io.emit('chat-clear');
             history = []
         } else {
             io.emit('chat-msg', msg);
             history.push(msg)
         }
+        let data = JSON.stringify({ 'history': history });
+        fs.writeFileSync(chatFile, data);
     });
 
 });

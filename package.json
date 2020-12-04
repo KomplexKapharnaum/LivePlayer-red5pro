@@ -9,7 +9,9 @@
   "author": "kxkm",
   "license": "ISC",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "express": "^4.15.2",
+    "french-badwords-list": "^1.0.5",
     "node-fetch": "^2.6.1",
     "socket.io": "^2.2.0"
   }

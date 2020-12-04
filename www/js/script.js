@@ -89,9 +89,11 @@ var kontroller = {
     // Quit
     //
     end: () => {
-        $('video').prop('muted', true)
-        $('.widget').hide()
-        $('.widget-end').show()
+        $('.widget').fadeOut(5000)
+        $('.widget-end').fadeIn(5000)
+        setTimeout(() => {
+            $('video').prop('muted', true)
+        }, 5000)
     },
 
     // Reload
@@ -123,6 +125,12 @@ socket.on('cmd', (data) => {
     console.log('cmd received: ', data)
     if (data['action'] == 'phase') kontroller[data['arg']](data['from'])
     else kontroller[data['action']](data['arg'], data['from']);
+});
+
+// COUNTER
+socket.on('count', function(msg) {
+    $('.btncount').remove();
+    $('<span class="btncount">').text('(' + msg + ')').appendTo('.btntxt')
 });
 
 // Chat

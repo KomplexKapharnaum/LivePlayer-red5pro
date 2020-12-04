@@ -262,6 +262,11 @@ body {
     font-size: 0.8em;
 }
 
+.btncount {
+    margin-left: 5px;
+    font-size: 0.7em;
+}
+
 .icon-bar {
     display: block;
     width: 100%;
