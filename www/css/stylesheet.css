@@ -29,6 +29,18 @@ body {
     font-size: 22px;
     background-color: black;
     color: white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        font-size: 18px;
+    }
 }
 
 
@@ -59,15 +71,22 @@ body {
 }
 
 .fsContainer {
+    /* border: 1px solid green; */
     z-index: 150;
     background-color: black;
     display: none;
+    justify-content: center;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .fsOverlay {
     /* border: 2px solid white; */
-    height: 100%;
-    width: 100%;
+    /* height: 90%;
+    width: 90%; */
+    margin: 1%;
+    padding: 1%;
+    flex: 1;
 }
 
 .instructionBackground {
@@ -105,17 +124,18 @@ body {
 .red5pro-media-container {
     width: 100%;
     height: 100%;
+    /* border: 1px solid pink; */
 }
 
 .player {
-    /* border: 1px solid red; */
+    /* border: 1px solid blue; */
     width: 100%;
     height: 100%;
     object-fit: contain;
     background-image: url("/img/jauge-light.gif");
     background-repeat: no-repeat;
     background-position: center;
-    border: 0px solid #DDD;
+    border: 1px solid black;
 }
 
 .fsBtn {
@@ -123,7 +143,7 @@ body {
     top: 3px;
     right: 2px;
     background-color: black;
-    width: 6%;
+    width: 5%;
     display: none;
     z-index: 190;
 }
@@ -135,13 +155,11 @@ body {
     display: none;
 }
 
-#textzone {
+#band {
     position: fixed;
-    top: 1%;
-    z-index: 100;
-    font-size: 2.8vh;
-    /* transform: rotate(90deg) translateX(50%) translateY(1550%); */
-    text-orientation: mixed;
+    top: 35px;
+    left: 0;
+    height: 85%;
 }
 
 .introtxt {
@@ -179,4 +197,255 @@ body {
     right: 1vw;
     /*width: 100%;*/
     font-size: 18px;
+}
+
+
+/* CHAT */
+
+#chatContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    pointer-events: none;
+}
+
+#chatContainer .bg {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 70px);
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s;
+    background: #000;
+}
+
+#chatContainer:focus-within .bg {
+    visibility: visible;
+    opacity: 0;
+}
+
+#chatContainer * {
+    visibility: visible;
+}
+
+.discussion {
+    top: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+    -webkit-appearance: none;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    height: 44px;
+    cursor: pointer;
+    pointer-events: auto;
+    margin-left: 10px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: none;
+    opacity: 0.5;
+    width: 90%;
+    max-width: 40%;
+}
+
+.btntxt {
+    top: 15px;
+    left: 43px;
+    position: fixed;
+    font-size: 0.8em;
+}
+
+.icon-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transition: .3s;
+    width: 20px;
+}
+
+.icon-bar+.icon-bar {
+    margin-top: 3px;
+}
+
+#chatContainer:focus-within .discussion {
+    pointer-events: none;
+    outline: none;
+    opacity: 1;
+}
+
+#chatContainer:focus-within .icon-bar:nth-of-type(1) {
+    transform: translate3d(0, 5px, 0) rotate(45deg);
+}
+
+#chatContainer:focus-within .icon-bar:nth-of-type(2) {
+    opacity: 0;
+}
+
+#chatContainer:focus-within .icon-bar:nth-of-type(3) {
+    transform: translate3d(0, -5px, 0) rotate(-45deg);
+}
+
+#chatboard {
+    margin-top: 35px;
+    padding: 10px;
+    width: 90%;
+    max-width: 40%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% - 50px);
+    background: #111;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transform: translateX(-100%);
+    transition: transform .3s;
+    will-change: transform;
+    contain: paint;
+    outline: none;
+    opacity: 0.90;
+}
+
+@media only screen and (max-width: 1100px) {
+    #chatboard {
+        max-width: 70%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #chatboard {
+        max-width: 90%;
+    }
+}
+
+#chatContainer:focus-within #chatboard {
+    transform: none;
+}
+
+#chatform {
+    font-size: 0.5em;
+    line-height: 30px;
+}
+
+#chatform label {
+    display: inline-block;
+    width: 16%;
+    text-align: right;
+    margin-right: 5px;
+}
+
+#chatform input[type=text] {
+    background-color: #000;
+    border: 0px;
+    border-left: 1px solid #666;
+    color: white;
+    padding: 5px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#chatform button {
+    background-color: #000;
+    border: 1px solid #666;
+    color: white;
+    font-family: "Plaak56", dinbold;
+    font-size: 1.1em;
+    padding: 7px 11px 4px;
+}
+
+#chatnick {
+    width: 20%;
+}
+
+#chatmsg {
+    width: 77%;
+}
+
+#chatmessages {
+    height: calc(100% - 100px);
+    /* border: 1px solid green; */
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    font-size: 0.7em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+@media only screen and (max-width: 700px) {
+    #chatmessages {
+        height: calc(100% - 200px);
+    }
+}
+
+#chatmessages li {
+    padding: 5px 10px;
+}
+
+#chatmessages li:nth-child(odd) {
+    background: #222;
+}
+
+.nick {
+    font-size: 0.7em;
+    margin-right: 10px;
+}
+
+.msg {
+    font-family: dinbold;
+}
+
+html {
+    scrollbar-face-color: #646464;
+    scrollbar-base-color: #646464;
+    scrollbar-3dlight-color: #646464;
+    scrollbar-highlight-color: #646464;
+    scrollbar-track-color: #000;
+    scrollbar-arrow-color: #000;
+    scrollbar-shadow-color: #646464;
+    scrollbar-dark-shadow-color: #646464;
+}
+
+ ::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+}
+
+ ::-webkit-scrollbar-button {
+    background-color: #666;
+}
+
+ ::-webkit-scrollbar-track {
+    background-color: #646464;
+}
+
+ ::-webkit-scrollbar-track-piece {
+    background-color: #000;
+}
+
+ ::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: #666;
+    border-radius: 3px;
+}
+
+ ::-webkit-scrollbar-corner {
+    background-color: #646464;
+}
+
+
+}
+ ::-webkit-resizer {
+    background-color: #666;
 }

@@ -9,6 +9,7 @@ var path = require('path')
 var express = require('express')
 var app = express();
 var http = require('http').createServer(app);
+const fetch = require('node-fetch');
 var io = require('socket.io')(http);
 
 console.log('starting server')
@@ -26,6 +27,14 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/www/index.html');
 });
 
+app.get('/teststream/:streamid', function(req, res) {
+    var streamid = req.params.streamid
+        // console.log(streamid, streams, streams.includes(streamid) ? '1' : '0')
+    res.send(streams.includes(streamid) ? '1' : '0');
+});
+
+// CHAT History
+var history = []
 
 io.on('connection', function(client) {
     console.log('a user connected');
@@ -37,6 +46,7 @@ io.on('connection', function(client) {
         client.emit('cmd', lastCmd)
         client.emit('show-name', showName)
         client.emit('allNames', book)
+        client.emit('chat-all', history)
 
         // Notify others
         client['name'] = name
@@ -71,7 +81,33 @@ io.on('connection', function(client) {
         io.emit('show-name', data)
     })
 
+    client.on('chat-msg', function(msg) {
+        if (msg['msg'] == '#clear') {
+            io.emit('chat-clear');
+            history = []
+        } else {
+            io.emit('chat-msg', msg);
+            history.push(msg)
+        }
+    });
+
 });
+
+// POLL STREAMS
+streams = []
+setInterval(() => {
+    fetch('https://red5.kxkm.net/api/v1/applications/live/streams?accessToken=kxkmlive37*')
+        .then(res => res.json())
+        .then(json => {
+            if ('data' in json)
+                streams = json['data']
+                // console.log(streams)
+        }).catch(error => {
+            // console.log(error)
+            streams = []
+        })
+
+}, 1000)
 
 http.listen(8080, function() {
     console.log('listening on *:8080');

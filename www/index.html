@@ -15,6 +15,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="/js/nosleep.min.js"></script>
+    <script src="/js/js.cookie.min.js"></script>
 
     <!-- Red5Pro -->
     <script src="/js/adapter.js"></script>
@@ -24,8 +25,6 @@
 </head>
 
 <body class="noselect">
-
-    <video id="testvid"></video>
 
     <!-- CONTROLS -->
     <div class="controls">
@@ -68,7 +67,7 @@
 
     <!-- LIVE -->
     <div class="content widget widget-live">
-        <div id="textzone"> KompleX KapharnaüM - Fenêtre ouverte - Esch 2022</div>
+        <img id="band" src="/img/band.png" />
 
         <div class="container">
             <!-- <div class="waiting"></div> -->
@@ -93,14 +92,34 @@
         <div class='introtxt'>
             <br />
             <br />
-            <br /> Le Live est terminée.<br /><br /> à bientôt !<br /><br /><br /><br /><br /><br /><br />
+            <br /> Le Live est terminé.<br /><br /> à bientôt !<br /><br /><br /><br /><br /><br /><br />
             <a href="https://kxkm.net"><img class="intrologo" src="/img/kxkm.png" /></a>
         </div>
     </div>
 
-    <script src="/js/red5pro-sdk.js"></script>
-    <script src="/js/script.js"></script>
-    <script src="/js/players.js"></script>
+    <!-- CHAT-->
+    <div id="chatContainer">
+        <div class="bg"></div>
+        <div class="discussion" tabindex="0">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="btntxt">Discussion</span>
+        </div>
+        <div id="chatboard" tabindex="0">
+            <ul id="chatmessages"></ul>
+            <form action="" id="chatform">
+                <label for="chatnick">Pseudo</label>
+                <input id="chatnick" required maxlength="10" type=text /><br />
+                <label for="chatmsg"><button>Envoi</button></label>
+                <input id="chatmsg" autocomplete="off" type=text />
+
+            </form>
+        </div>
+
+        <script src="/js/red5pro-sdk.js"></script>
+        <script src="/js/script.js"></script>
+        <script src="/js/players.js"></script>
 </body>
 
 
